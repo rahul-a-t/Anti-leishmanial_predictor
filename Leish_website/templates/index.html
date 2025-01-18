@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>LeDIP: The Anti-Leishmanial Predictor</title>
+        <style>
+            body {
+                background-color: #f1f8ff;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height: 100vh;
+            }
+            
+            .container {
+                background-color: #ffffff;
+                border: 2px solid #87ceeb;
+                border-radius: 5px;
+                padding: 20px;
+                width: 600px;
+            }
+            
+            h1 {
+                text-align: center;
+                color: #007bff;
+                font-size: 32px;
+                margin-bottom: 10px;
+            }
+            
+            h2 {
+                text-align: center;
+                color: #007bff;
+                font-size: 20px;
+                margin-bottom: 20px;
+            }
+            
+            label {
+                display: block;
+                margin-bottom: 10px;
+                color: #007bff;
+            }
+            
+            textarea {
+                width: 100%;
+                padding: 10px;
+                border: 1px solid #d4d4d4;
+                border-radius: 3px;
+                resize: vertical;
+            }
+            
+            input[type="file"] {
+                margin-bottom: 10px;
+            }
+            
+            input[type="submit"] {
+                background-color: #007bff;
+                color: #ffffff;
+                padding: 10px 20px;
+                border: none;
+                border-radius: 5px;
+                cursor: pointer;
+            }
+            
+            input[type="submit"]:hover {
+                background-color: #0056b3;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <h1>LeDIP</h1>
+            <h2>Leishmania Donovani Inhibitor Predictor</h2>
+            <form method="POST" action="{{ url_for('predict') }}" enctype="multipart/form-data">
+                <label for="smiles">SMILES:</label>
+                <textarea id="smiles" name="smiles" rows="10" cols="50"></textarea>
+                <label for="file">Or upload a CSV or text file:</label>
+                <input type="file" id="file" name="file">
+                <input type="submit" value="Predict">
+            </form>
+        </div>
+    </body>
+</html>

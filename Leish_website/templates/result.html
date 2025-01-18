@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>SMILE Predictor</title>
+        <style>
+            body {
+                background-color: #f1f8ff;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height: 100vh;
+            }
+            
+            .container {
+                background-color: #ffffff;
+                border: 2px solid #87ceeb;
+                border-radius: 5px;
+                padding: 20px;
+                width: 800px; /* Adjusted width for the container */
+            }
+            
+            h1 {
+                text-align: center;
+                color: #007bff;
+            }
+            
+            table {
+                width: 100%;
+                border-collapse: collapse;
+                margin-bottom: 20px;
+            }
+            
+            th, td {
+                padding: 10px;
+                text-align: left;
+                border-bottom: 1px solid #d4d4d4;
+            }
+            
+            th {
+                background-color: #f0f8ff;
+            }
+            
+            .active {
+                color: green;
+            }
+            
+            .inactive {
+                color: red;
+            }
+            
+            .download-link {
+                display: block;
+                text-align: center;
+                margin-top: 20px;
+                color: #007bff;
+                text-decoration: none;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <h1>Result</h1>
+            <table>
+                <tr>
+                    <th style="width: 40%;">SMILE</th> <!-- Adjusted width for the 1st column -->
+                    <th style="width: 30%;">Active Probability</th> <!-- Adjusted width for the 2nd column -->
+                    <th style="width: 30%;">Predicted Activity</th> <!-- Adjusted width for the 3rd column -->
+                </tr>
+                {% for i in range(prediction|length) %}
+                <tr>
+                    <td>{{ smiles[i] }}</td>
+                    <td>{{ prediction_proba[i][1] }}</td>
+                    <td class="{{ 'active' if prediction[i] == 1 else 'inactive' }}">
+                        {% if prediction[i] == 1 %}
+                            HIT
+                        {% else %}
+                            NON-HIT
+                        {% endif %}
+                    </td>
+                </tr>
+                {% endfor %}
+            </table>
+            <a class="download-link" href="{{ url_for('download_csv', smiles=smiles, prediction_proba=prediction_proba, prediction=prediction) }}">Download CSV</a>
+        </div>
+    </body>
+</html>
